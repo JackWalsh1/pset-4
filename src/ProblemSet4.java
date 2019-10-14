@@ -27,7 +27,7 @@ public class ProblemSet4 {
         
         // comment out or uncomment as needed
         
-        ps.sum();
+        //ps.sum();
         ps.reverse();
         ps.digits();
         ps.average();
@@ -49,10 +49,39 @@ public class ProblemSet4 {
      * 
      * Compute the sum of all even integers between the lower and upper bounds,
      * including the bounds themselves.
+     * 
+     * Issues seemingly arise with end results. Solved?
      */
     
     public void sum() {
-        
+
+        boolean initialPrompt = true;
+        int lowerBound;
+        int upperBound;
+        long sum = 0;
+
+        do { 
+            if (initialPrompt == true) {
+                initialPrompt = false;
+                System.out.print("\nLower bound: ");
+            } else {
+                System.out.print("Lower bound: ");
+            }
+            lowerBound = in.nextInt();
+            in.nextLine();
+            System.out.print("Upper bound: ");
+            upperBound = in.nextInt();
+        } while (lowerBound > upperBound); //asks again if invalid
+
+        while (lowerBound <= upperBound) {
+            if (lowerBound % 2 == 1) { //correcting for odd numbers
+                lowerBound++;
+            }
+            sum += lowerBound;
+            lowerBound += 2;
+        }
+
+        System.out.printf("\n%,d.", sum);
     }
     
     /*
@@ -60,10 +89,40 @@ public class ProblemSet4 {
      * 
      * Prompt the user to enter a positive integer. Print the digits of this integer
      * in reverse order.
+     * 
+     * 
      */
     
     public void reverse() {
 
+        boolean initialPrompt = true;
+        int userInt;
+        String reversedInt = "";
+
+
+        do {
+            if (initialPrompt) {
+                initialPrompt = false;
+                System.out.print("\nPositive integer: ");
+            } else {
+                System.out.print("Positive integer: ");
+            }
+            userInt = in.nextInt();
+        } while (userInt <= 0);
+
+        String intString = Integer.toString(userInt);
+        initialPrompt = true;
+        int i = intString.length() - 1;
+
+        do {    
+            reversedInt += (intString.substring(i) + ", ");
+            intString = intString.substring(0, i);
+            i--;
+        } while (i >= 0);
+
+        reversedInt += "\b\b.";
+
+        System.out.print("\n" + reversedInt);
     }
     
     /*
