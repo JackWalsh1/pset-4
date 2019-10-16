@@ -28,8 +28,8 @@ public class ProblemSet4 {
         // comment out or uncomment as needed
         
         //ps.sum();
-        ps.reverse();
-        ps.digits();
+        //ps.reverse();
+        //ps.digits();
         ps.average();
         ps.prime();
         ps.fibonacci();
@@ -86,10 +86,11 @@ public class ProblemSet4 {
     
     /*
      * Exercise 2.
-     * 
+     * S
      * Prompt the user to enter a positive integer. Print the digits of this integer
      * in reverse order.
      * 
+     * Solved!
      * 
      */
     
@@ -111,7 +112,6 @@ public class ProblemSet4 {
         } while (userInt <= 0);
 
         String intString = Integer.toString(userInt);
-        initialPrompt = true;
         int i = intString.length() - 1;
 
         do {    
@@ -120,9 +120,9 @@ public class ProblemSet4 {
             i--;
         } while (i >= 0);
 
-        reversedInt += "\b\b.";
+        reversedInt += "\b\b."; //properly ends output
 
-        System.out.print("\n" + reversedInt);
+        System.out.println("\n" + reversedInt);
     }
     
     /*
@@ -130,9 +130,38 @@ public class ProblemSet4 {
      * 
      * Prompt the user to enter a positive integer. Compute the sum of all of the odd
      * digits in the integer.
+     * 
+     * Solved!
+     * 
      */
     
     public void digits() {
+
+        boolean initialPrompt = true;
+        int userInt;
+
+        do {
+            if (initialPrompt) {
+                initialPrompt = false;
+                System.out.print("\nPositive integer: ");
+            } else {
+                System.out.print("Positive integer: ");
+            }
+            userInt = in.nextInt();
+        } while (userInt <= 0);
+
+        int storageInt = userInt;
+        long sum = 0;
+
+        do {  
+            storageInt = userInt % 10;
+            if (storageInt % 2 != 0) { //test for odd number
+                sum += storageInt;
+            }
+            userInt /= 10;
+        } while (userInt > 0);
+
+        System.out.print("\n" + sum + ".");
 
     }
     
@@ -142,10 +171,38 @@ public class ProblemSet4 {
      * Prompt the user to enter a series of non-negative integers. When the user
      * enters a negative integer, you can assume he or she is done entering values.
      * What is the average of the values entered?
+     * 
+     * Solved!
+     * 
      */
     
     public void average() {
 
+        boolean initialPrompt = true;
+        boolean stopCode = false;
+        int userInt;
+        double intSum = 0;
+        int count = 0;
+
+        do {
+            if (initialPrompt) {
+                initialPrompt = false;
+                System.out.print("\nNon-negative integer: ");
+            } else {
+                System.out.print("Non-negative integer: ");
+            }
+            userInt = in.nextInt();
+            if (userInt < 0) {
+                stopCode = true;
+            } else {
+            intSum += userInt;
+            count++;
+            }
+        } while (!stopCode);
+
+        double average = intSum / count;
+
+        System.out.printf("\n%,.2f.", average);
     }
     
     /*
