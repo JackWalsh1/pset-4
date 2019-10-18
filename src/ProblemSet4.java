@@ -259,8 +259,37 @@ public class ProblemSet4 {
     
     public void fibonacci() {
 
+        boolean initialPrompt = true;
+        int userInt;
 
+        do {
+            if (initialPrompt) {
+                initialPrompt = false;
+                System.out.print("\nPositive integer: ");
+            } else {
+                System.out.print("Positive integer: ");
+            }
+            userInt = in.nextInt();
+        } while (userInt > 0 && userInt < 93);
 
+        int sum = 0;
+
+        int firstAdded = 0;
+        int secondAdded = 1;
+
+        for (int i = 2; i < userInt; i++) { //offset due to declaration of initial numbers
+            sum = firstAdded + secondAdded;
+            firstAdded = secondAdded;
+            secondAdded = sum;
+        }
+
+        if (userInt == 1) {
+            sum = firstAdded;
+        } else if (userInt == 2) {
+            sum = secondAdded;
+        }
+
+        System.out.println("\n" + sum + ".");
     }
     
     /*
