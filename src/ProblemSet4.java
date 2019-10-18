@@ -270,7 +270,7 @@ public class ProblemSet4 {
                 System.out.print("Positive integer: ");
             }
             userInt = in.nextInt();
-        } while (userInt > 0 && userInt < 93);
+        } while (userInt < 1 || userInt > 92);
 
         int sum = 0;
 
