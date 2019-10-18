@@ -30,7 +30,7 @@ public class ProblemSet4 {
         //ps.sum();
         //ps.reverse();
         //ps.digits();
-        ps.average();
+        //ps.average();
         ps.prime();
         ps.fibonacci();
         ps.factors();
@@ -208,10 +208,45 @@ public class ProblemSet4 {
     /*
      * Exercise 5.
      * 
-     * Prompt the user to enter a non-negative integer. Is this number prime?
+     * Prompt the user to enter a non-negative integer. Is this number prime
+     * 
+     * Zero is NOT prime.
+     * 
+     * Solved?
      */
     
     public void prime() {
+
+        boolean initialPrompt = true;
+        int userInt;
+        boolean prime = true;
+
+        do { //non-negative integer prompt
+            if (initialPrompt) {
+                initialPrompt = false;
+                System.out.print("\nNon-negative integer: ");
+            } else {
+                System.out.print("Non-negative integer: ");
+            }
+            userInt = in.nextInt();
+        } while (userInt < 0);
+
+        for (int i = (userInt - 1); i > 1; i--) { //possible divisible numbers are between userint-1 and 1, exclusive 
+            if ((userInt % i) == 0) { //prime check
+                prime = false;
+            } 
+        }
+
+        if (userInt == 0) {
+            prime = false;
+        }
+
+
+        if (prime) {
+            System.out.println("\nPrime.");
+        } else {
+            System.out.println("\nNot prime.");
+        }
 
     }
     
@@ -223,6 +258,8 @@ public class ProblemSet4 {
      */
     
     public void fibonacci() {
+
+
 
     }
     
