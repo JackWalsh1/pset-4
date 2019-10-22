@@ -31,8 +31,8 @@ public class ProblemSet4 {
         //ps.reverse();
         //ps.digits();
         //ps.average();
-        ps.prime();
-        ps.fibonacci();
+        //ps.prime();
+        //ps.fibonacci();
         ps.factors();
         ps.mario();
         ps.luigi();
@@ -300,6 +300,40 @@ public class ProblemSet4 {
     
     public void factors() {
 
+        boolean initialPrompt = true;
+        int userInt;
+        
+        do {
+            if (initialPrompt) {
+                initialPrompt = false;
+                System.out.print("\nPositive integer: ");
+            } else {
+                System.out.print("Positive integer: ");
+            }
+            userInt = in.nextInt();
+        } while (userInt <= 0);    
+
+        int lowestFactor = 0;
+        int highestFactor = 1;
+        String factorString = "";
+
+        for (int i = 1; lowestFactor < highestFactor; i++) {
+            if (userInt % i == 0) {
+                lowestFactor = i;
+                highestFactor = userInt / i;
+                if (lowestFactor < highestFactor) { //displays integers if they are not already shown
+                    factorString += lowestFactor + ", " + highestFactor + ", "; 
+                }           
+            } 
+        }
+
+        if (lowestFactor == highestFactor) { //edge case in case of square number
+            factorString += lowestFactor + ".";
+        } else { //corrects end formatting
+            factorString += "\b\b.";
+        }
+
+        System.out.println("\n" + factorString);
     }
     
     /*
@@ -309,8 +343,37 @@ public class ProblemSet4 {
      * Mario-style half-pyramid of the specified height.
      */
     
-    public void mario() {        
+    public void mario() {
+        
+        boolean initialPrompt = true;
+        int height;
 
+        do {
+            if (initialPrompt) {
+                initialPrompt = false;
+                System.out.print("\nHeight: ");
+            } else {
+                System.out.print("Height: ");
+            }
+            height = in.nextInt();
+        } while (height < 1 || height > 24);
+
+        String pyramid = "";
+        int blockCount = 2;
+        height += 1;
+
+        while (height >= blockCount) { //checks height while also preserving structure
+            pyramid += "\n"; //creates new line
+            for (int i = height; i > blockCount; i--) {
+                pyramid += " ";
+            }
+            for (int j = 0; j < blockCount; j++) {
+                pyramid += "#";
+            }
+            blockCount++;
+        }
+
+        System.out.println(pyramid);
     }
     
     /*
@@ -322,6 +385,39 @@ public class ProblemSet4 {
     
     public void luigi() {
 
+        boolean initialPrompt = true;
+        int height;
+
+        do {
+            if (initialPrompt) {
+                initialPrompt = false;
+                System.out.print("\nHeight: ");
+            } else {
+                System.out.print("Height: ");
+            }
+            height = in.nextInt();
+        } while (height < 1 || height > 24);
+
+        String pyramid = "";
+        int blockCount = 2;
+        height += 1;
+
+        while (height >= blockCount) { //checks height while also preserving structure
+            pyramid += "\n"; //creates new line
+            for (int i = height; i > blockCount; i--) {
+                pyramid += " ";
+            }
+            for (int j = 0; j < blockCount; j++) {
+                pyramid += "#";
+            }
+            pyramid += "  ";
+            for (int j = 0; j < blockCount; j++) {
+                pyramid += "#";
+            }
+            blockCount++;
+        }
+
+        System.out.println(pyramid);
     }
     
     /*
