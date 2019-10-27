@@ -277,15 +277,13 @@ public class ProblemSet4 {
         int firstAdded = 0;
         int secondAdded = 1;
 
-        for (int i = 2; i < userInt; i++) { //offset due to declaration of initial numbers
+        for (int i = 1; i < userInt; i++) { //offset due to declaration of initial numbers
             sum = firstAdded + secondAdded;
             firstAdded = secondAdded;
             secondAdded = sum;
         }
 
         if (userInt == 1) {
-            sum = firstAdded;
-        } else if (userInt == 2) {
             sum = secondAdded;
         }
 
