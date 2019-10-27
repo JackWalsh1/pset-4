@@ -428,6 +428,8 @@ public class ProblemSet4 {
      */
     
     public void credit() {
+
+        System.out.println("Test");
         
     }
 }
