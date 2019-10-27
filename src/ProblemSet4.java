@@ -27,12 +27,12 @@ public class ProblemSet4 {
         
         // comment out or uncomment as needed
         
-        //ps.sum();
-        //ps.reverse();
-        //ps.digits();
-        //ps.average();
-        //ps.prime();
-        //ps.fibonacci();
+        ps.sum();
+        ps.reverse();
+        ps.digits();
+        ps.average();
+        ps.prime();
+        ps.fibonacci();
         ps.factors();
         ps.mario();
         ps.luigi();
@@ -81,7 +81,7 @@ public class ProblemSet4 {
             lowerBound += 2;
         }
 
-        System.out.printf("\n%,d.", sum);
+        System.out.printf("\n%,d.\n", sum);
     }
     
     /*
@@ -161,7 +161,7 @@ public class ProblemSet4 {
             userInt /= 10;
         } while (userInt > 0);
 
-        System.out.print("\n" + sum + ".");
+        System.out.println("\n" + sum + ".");
 
     }
     
@@ -202,7 +202,7 @@ public class ProblemSet4 {
 
         double average = intSum / count;
 
-        System.out.printf("\n%,.2f.", average);
+        System.out.printf("\n%,.2f.\n", average);
     }
     
     /*
@@ -429,7 +429,65 @@ public class ProblemSet4 {
     
     public void credit() {
 
-        System.out.println("Test");
+        //Initialization / declaration of neccesary variables.
+        boolean initialPrompt = true;
+        long creditCard;
+        int secondDigitsSum = 0;
+        int remainingDigitsSum = 0;
+        int selectedDigit;
+        String cardType = "Invalid."; //Less code to have as default instead of at end of each piece.
+
+        //Prompting user for credit card number.
+        do { 
+            if (initialPrompt) {
+                initialPrompt = false;
+                System.out.print("\nNumber: ");
+            } else {
+                System.out.print("Number: ");
+            }
+            creditCard = in.nextLong();
+        } while (creditCard < 0); //Continuously prompt until positive integer.
+
+        String cardString = Long.toString(creditCard); //String easiest to work with. 
+
+        //Step 1 + 2
+        for (int i = cardString.length() - 1; i > 0; i -= 2) {
+            selectedDigit = Integer.parseInt(cardString.substring(i - 1, i)) * 2; //Step 1
+            if (selectedDigit > 9) { //Check for two-digit number.
+                secondDigitsSum += selectedDigit % 10; //Ones digit in two-digit number summation.
+                selectedDigit /= 10; //Taking out ones digit.
+            }
+            secondDigitsSum += selectedDigit; //Summation for digits in Step 2.
+        }
+
+        //Step 3
+        for (int j = cardString.length(); j > 0; j -= 2) {
+            remainingDigitsSum += Integer.parseInt(cardString.substring(j - 1, j));
+        }
+
+        int totalSum = secondDigitsSum + remainingDigitsSum; //Step 4
+
+        //Created for final verification.
+        String firstTwoDigits = cardString.substring(0, 2);
+        int secondDigit = Integer.parseInt(firstTwoDigits.substring(1));
+
+        if (totalSum % 10 == 0) { //Step 5 Verification
+            if (firstTwoDigits.equals("34") || firstTwoDigits.equals("37")) { //Amex two digit check
+                if (cardString.length() == 15) { 
+                    cardType = "Amex.";
+                } 
+            } else if (firstTwoDigits.startsWith("5") && (1 <= secondDigit && secondDigit <= 5)) {
+                if (cardString.length() == 16) {
+                    cardType = "Mastercard.";
+                } 
+            } else if (firstTwoDigits.startsWith("4")) { //Visa two digit check
+                if (cardString.length() == 13 || cardString.length() == 16) {
+                    cardType = "Visa.";
+                } 
+            } //All cards passed this point are invalid even with correct Luhn's.
+        }
+
+        System.out.println("\n" + cardType); //Display result.
         
     }
 }
